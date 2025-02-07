@@ -1,0 +1,22 @@
+{% extends "accounts/base.html" %}
+{% block title %}Deposit{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Deposit Money</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Amount</label>
+                        {{ form.amount.errors }}
+                        <input type="number" name="amount" step="0.01" min="0.01" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Deposit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

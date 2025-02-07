@@ -1,0 +1,33 @@
+{% extends "accounts/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Account Information</h5>
+                <p class="card-text">Account Number: {{ account.account_number }}</p>
+                <p class="card-text">Balance: ${{ account.balance }}</p>
+                <div class="btn-group">
+                    <a href="{% url 'deposit' %}" class="btn btn-success">Deposit</a>
+                    <a href="{% url 'withdraw' %}" class="btn btn-primary">Withdraw</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <h3>Recent Transactions</h3>
+        {% for transaction in transactions %}
+            <div class="card transaction-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ transaction.transaction_type }}</h5>
+                    <p class="card-text">Amount: ${{ transaction.amount }}</p>
+                    <p class="card-text"><small class="text-muted">{{ transaction.timestamp }}</small></p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No transactions yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
